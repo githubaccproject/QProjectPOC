@@ -1,29 +1,30 @@
-using Application.Handlers.CustomerHandler;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
+using Application.Mapping;
+using Application.Handlers;
+using Application.RepositoryRegistration;
+using Application.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+AuthenticationRegistration.RegisterAuthentication(builder.Services, builder.Configuration);
+RepositoryRegistration.RegisterRepositories(builder.Services);
+MediatRRegistration.RegisterMediatRHandlers(builder.Services);
+ValidatorRegistration.RegisterValidators(builder.Services);
+SwaggerRegistration.RegisterSwagger(builder.Services);
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
+
+
+
+

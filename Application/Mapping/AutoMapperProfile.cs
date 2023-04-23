@@ -1,4 +1,4 @@
-﻿using Application.DTOs.CustomerDto;
+﻿using Application.DTOs;
 using AutoMapper;
 using Domain.Entities;
 using System;
@@ -13,9 +13,9 @@ namespace Application.Mapping
     {
         public AutoMapperProfile()
         {
-            CreateMap<CreateCustomerDto, Customer>();
-            CreateMap<CustomerDto, Customer>();
-            CreateMap<UpdateCustomerDto, Customer>();
+            CreateMap<CreateCustomerDto, Customer>().ReverseMap();
+            CreateMap<CustomerDto, Customer>().ReverseMap();
+            CreateMap<UpdateCustomerDto, Customer>().ReverseMap();
             // Add other mappings as needed
         }
     }

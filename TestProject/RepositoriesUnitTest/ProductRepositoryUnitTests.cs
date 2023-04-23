@@ -26,12 +26,12 @@ namespace TestProject.RepositoryUnitTests
                 .Options;
 
             // Initialize the ProductRepository with the in-memory database
-            using (var dbContext = new ApplicationDBContext(_dbContextOptions))
+            using (var dbContext = new ApplicationDBContext(_dbContextOptions,null))
             {
                 dbContext.Database.EnsureCreated();
             }
 
-            _productRepository = new ProductRepository(new ApplicationDBContext(_dbContextOptions));
+            _productRepository = new ProductRepository(new ApplicationDBContext(_dbContextOptions,null));
         }
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace TestProject.RepositoryUnitTests
             _productRepository.SaveChangesAsync();
 
             // Assert
-            using (var dbContext = new ApplicationDBContext(_dbContextOptions))
+            using (var dbContext = new ApplicationDBContext(_dbContextOptions,null))
             {
                 var result = await dbContext.Product.FirstOrDefaultAsync(p => p.Id == product.Id);
                 Assert.IsNotNull(result);
@@ -64,7 +64,7 @@ namespace TestProject.RepositoryUnitTests
         {
             // Arrange
             var product = new Product { Id = 1, Name = "Product1", Barcode = "123456789", IsActive = true, Description = "Test Product 1", price = 10.99m, Category = "Test Category" };
-            using (var dbContext = new ApplicationDBContext(_dbContextOptions))
+            using (var dbContext = new ApplicationDBContext(_dbContextOptions,null))
             {
                 dbContext.Product.Add(product);
                 dbContext.SaveChanges();
@@ -82,7 +82,7 @@ namespace TestProject.RepositoryUnitTests
             _productRepository.SaveChangesAsync();
 
             // Assert
-            using (var dbContext = new ApplicationDBContext(_dbContextOptions))
+            using (var dbContext = new ApplicationDBContext(_dbContextOptions,null))
             {
                 var result = await dbContext.Product.FirstOrDefaultAsync(p => p.Id == product.Id);
                 Assert.IsNotNull(result);
@@ -101,7 +101,7 @@ namespace TestProject.RepositoryUnitTests
         {
             // Arrange
             var product = new Product { Id = 1, Name = "Product1", Barcode = "123456789", IsActive = true, Description = "Test Product 1", price = 10.99m, Category = "Test Category" };
-            using (var dbContext = new ApplicationDBContext(_dbContextOptions))
+            using (var dbContext = new ApplicationDBContext(_dbContextOptions,null))
             {
                 dbContext.Product.Add(product);
                 dbContext.SaveChanges();
@@ -112,7 +112,7 @@ namespace TestProject.RepositoryUnitTests
             _productRepository.SaveChangesAsync();
 
             // Assert
-            using (var dbContext = new ApplicationDBContext(_dbContextOptions))
+            using (var dbContext = new ApplicationDBContext(_dbContextOptions,null))
             {
                 var result = await dbContext.Product.FirstOrDefaultAsync(p => p.Id == product.Id);
                 Assert.IsNull(result);

@@ -1,5 +1,4 @@
-﻿using Application.Commands.CustomerCommand;
-using Application.DTOs.CustomerDto;
+﻿using Application.DTOs;
 using Application.Exceptions;
 using Application.Queries.CustomerQuery;
 using AutoMapper;
