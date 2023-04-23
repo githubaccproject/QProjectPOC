@@ -27,12 +27,12 @@ namespace TestProject.RepositoriesUnitTest
                 .Options;
 
             // Initialize the MembershipRepository with the in-memory database
-            using (var dbContext = new ApplicationDBContext(_dbContextOptions))
+            using (var dbContext = new ApplicationDBContext(_dbContextOptions,null))
             {
                 dbContext.Database.EnsureCreated();
             }
 
-            _membershipRepository = new MembershipRepository(new ApplicationDBContext(_dbContextOptions));
+            _membershipRepository = new MembershipRepository(new ApplicationDBContext(_dbContextOptions,null));
         }
 
         [TestMethod]
@@ -46,7 +46,7 @@ namespace TestProject.RepositoriesUnitTest
             _membershipRepository.SaveChangesAsync();
 
             // Assert
-            using (var dbContext = new ApplicationDBContext(_dbContextOptions))
+            using (var dbContext = new ApplicationDBContext(_dbContextOptions,null))
             {
                 var result = await dbContext.Membership.FirstOrDefaultAsync(m => m.Id == membership.Id);
                 Assert.IsNotNull(result);
@@ -60,7 +60,7 @@ namespace TestProject.RepositoriesUnitTest
         {
             // Arrange
             var membership = new Membership { Id = 1, Name = "Test Membership", Price = "14.99" };
-            using (var dbContext = new ApplicationDBContext(_dbContextOptions))
+            using (var dbContext = new ApplicationDBContext(_dbContextOptions,null))
             {
                 dbContext.Membership.Add(membership);
                 dbContext.SaveChanges();
@@ -72,7 +72,7 @@ namespace TestProject.RepositoriesUnitTest
             _membershipRepository.SaveChangesAsync();
 
             // Assert
-            using (var dbContext = new ApplicationDBContext(_dbContextOptions))
+            using (var dbContext = new ApplicationDBContext(_dbContextOptions,null))
             {
                 var result = await dbContext.Membership.FirstOrDefaultAsync(m => m.Id == membership.Id);
                 Assert.IsNotNull(result);
@@ -85,7 +85,7 @@ namespace TestProject.RepositoriesUnitTest
         {
             // Arrange
             var membership = new Membership { Id = 1, Name = "Test Membership", Price = "14.99" };
-            using (var dbContext = new ApplicationDBContext(_dbContextOptions))
+            using (var dbContext = new ApplicationDBContext(_dbContextOptions,null))
             {
                 dbContext.Membership.Add(membership);
                 dbContext.SaveChanges();
@@ -96,7 +96,7 @@ namespace TestProject.RepositoriesUnitTest
             _membershipRepository.SaveChangesAsync();
 
             // Assert
-            using (var dbContext = new ApplicationDBContext(_dbContextOptions))
+            using (var dbContext = new ApplicationDBContext(_dbContextOptions,null))
             {
                 var result = await dbContext.Membership.FirstOrDefaultAsync(m => m.Id == membership.Id);
                 Assert.IsNull(result);
@@ -107,7 +107,7 @@ namespace TestProject.RepositoriesUnitTest
         public void TestCleanup()
         {
             // Clean up the in-memory database after each test
-            using (var dbContext = new ApplicationDBContext(_dbContextOptions))
+            using (var dbContext = new ApplicationDBContext(_dbContextOptions,null))
             {
                 dbContext.Database.EnsureDeleted();
             }

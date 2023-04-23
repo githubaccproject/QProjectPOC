@@ -1,4 +1,4 @@
-﻿using Application.DTOs.CustomerDto;
+﻿using Application.DTOs;
 using FluentValidation;
 
 public class CustomerDtoValidator : AbstractValidator<CreateCustomerDto>

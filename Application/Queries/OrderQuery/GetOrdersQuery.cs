@@ -6,11 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Queries.CustomerQuery
+namespace Application.Queries.OrderQuery
 {
-    public class GetCustomersQuery : IRequest<List<CustomerDto>>
+    public class GetOrdersQuery : IRequest<List<OrderDto>>
     {
-       
+        
     }
-
 }

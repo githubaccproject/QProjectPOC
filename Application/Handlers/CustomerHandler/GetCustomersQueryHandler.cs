@@ -1,4 +1,4 @@
-﻿using Application.DTOs.CustomerDto;
+﻿using Application.DTOs;
 using Application.Queries.CustomerQuery;
 using AutoMapper;
 using Infrastructure.Repositories.CustomerRepository;

@@ -1,4 +1,4 @@
-﻿using Application.Commands.CustomerCommand;
+﻿using Application.Commands;
 using AutoMapper;
 using Domain.Entities;
 using Infrastructure.Repositories.CustomerRepository;

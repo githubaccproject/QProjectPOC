@@ -1,4 +1,4 @@
-﻿using Application.Commands.CustomerCommand;
+﻿using Application.Commands;
 using Infrastructure.Repositories.CustomerRepository;
 using MediatR;
 using System;
