@@ -50,27 +50,20 @@ namespace Api.Controllers
         {
             try
             {
-                // Use Mediator to send a GetOrderByIdQuery
                 var query = new GetOrderByIdQuery(id);
                 var order = await _mediator.Send(query);
-
-                // If order is not found, return NotFound
                 if (order == null)
                 {
                     return NotFound();
                 }
-
-                // Map Order to OrderDto
                 var orderDto = _mapper.Map<OrderDto>(order);
 
                 return Ok(orderDto);
             }
             catch (Exception ex)
             {
-                // Log error using ILogger
+           
                 _logger.LogError(ex, "Failed to get order by ID");
-
-                // Handle exception and return appropriate response
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -82,7 +75,6 @@ namespace Api.Controllers
         {
             try
             {
-                // Validate request data using FluentValidation
                 var validator = new CreateOrderDtoValidator();
                 var result = await validator.ValidateAsync(createOrderDto);
                 if (!result.IsValid)
@@ -91,19 +83,12 @@ namespace Api.Controllers
                 }
 
                 var command = new CreateOrderCommand { Order = createOrderDto };
-
-                // Use Mediator to send a CreateOrderCommand
                 var orderId = await _mediator.Send(command);
-
-                // Return the created order ID in the response
                 return CreatedAtAction(nameof(GetOrderById), new { id = orderId }, null);
             }
             catch (Exception ex)
             {
-                // Log error using ILogger
                 _logger.LogError(ex, "Failed to create order");
-
-                // Handle exception and return appropriate response
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -116,7 +101,6 @@ namespace Api.Controllers
         {
             try
             {
-                // Validate request data using FluentValidation
                 var validator = new UpdateOrderDtoValidator();
                 var result = await validator.ValidateAsync(updateOrderDto);
                 if (!result.IsValid)
@@ -129,18 +113,12 @@ namespace Api.Controllers
                     Id = id,
                     Order = updateOrderDto
                 };
-
-                // Use Mediator to send an UpdateOrderCommand
                 await _mediator.Send(command);
-
-                // Return a NoContent response
                 return NoContent();
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to update order");
-
-                // Handle exception and return appropriate response
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -153,18 +131,13 @@ namespace Api.Controllers
             try
             {
                 var command = new DeleteOrderCommand { Id = id };
-
-                // Use Mediator to send a DeleteOrderCommand
                 await _mediator.Send(command);
 
                 return Ok();
             }
             catch (Exception ex)
             {
-                // Log error using ILogger
                 _logger.LogError(ex, "Failed to delete order");
-
-                // Handle exception and return appropriate response
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
