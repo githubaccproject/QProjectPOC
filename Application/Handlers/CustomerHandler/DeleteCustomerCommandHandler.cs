@@ -20,16 +20,12 @@ namespace Application.Handlers.CustomerHandler
 
         public async Task<bool> Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
         {
-            // Retrieve the customer from the repository
             var customer = await _customerRepository.GetByIdAsync(request.Id);
 
             if (customer == null)
             {
-                // Customer not found, handle appropriately
                 throw new Exception("Customer not found.");
             }
-
-            // Delete the customer from the repository
             _customerRepository.Delete(customer);
             await _customerRepository.SaveChangesAsync();
 
