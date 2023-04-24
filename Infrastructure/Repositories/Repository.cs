@@ -56,7 +56,7 @@ namespace Infrastructure.Repositories
             }
             catch (Exception ex)
             {
-                // Handle exception and log error
+               
                 throw new Exception("Failed to save changes in the database.", ex);
             }
         }
