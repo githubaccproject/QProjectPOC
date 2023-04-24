@@ -24,16 +24,16 @@ namespace Application.Services
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, "Santhosh"), // Set the user's name as a claim
-                new Claim(ClaimTypes.Role, "Admin"), // Set the user's role as a claim
+                new Claim(ClaimTypes.Name, "Santhosh"),
+                new Claim(ClaimTypes.Role, "Admin"), 
                 // Add any other claims as needed
             };
 
             var claimsIdentity = new ClaimsIdentity(
-                claims, // Pass the list of claims
-                "TokenAuth", // Set the authentication type
-                ClaimTypes.Name, // Set the name claim type
-                ClaimTypes.Role // Set the role claim type
+                claims, 
+                "TokenAuth", 
+                ClaimTypes.Name, 
+                ClaimTypes.Role 
             );
 
             var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["Jwt:SecretKey"]));
@@ -48,7 +48,6 @@ namespace Application.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
 
-            // Store the token in cache with a sliding expiration of 1 hour
             _memoryCache.Set("JwtToken", tokenString, TimeSpan.FromHours(1));
 
             return tokenString;
@@ -57,10 +56,10 @@ namespace Application.Services
 
         public bool ValidateToken(string token)
         {
-            // Retrieve the token from cache
+           
             if (_memoryCache.TryGetValue("JwtToken", out string cachedToken))
             {
-                // Compare the retrieved token with the provided token
+               
                 if (string.Equals(token, cachedToken))
                 {
                     return true;
