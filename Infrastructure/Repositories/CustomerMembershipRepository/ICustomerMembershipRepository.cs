@@ -9,6 +9,6 @@ namespace Infrastructure.Repositories.CustomerMembershipRepository
 {
     public interface ICustomerMembershipRepository : IRepository<CustomerMembership>
     {
-        // Add any additional methods specific to CustomerMembership entity
+        
     }
 }
