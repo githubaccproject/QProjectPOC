@@ -20,16 +20,16 @@ namespace Application.Handlers.OrderHandler
 
         public async Task<bool> Handle(DeleteOrderCommand request, CancellationToken cancellationToken)
         {
-            // Retrieve the Order from the repository
+           
             var Order = await _OrderRepository.GetByIdAsync(request.Id);
 
             if (Order == null)
             {
-                // Order not found, handle appropriately
+               
                 throw new Exception("Order not found.");
             }
 
-            // Delete the Order from the repository
+           
             _OrderRepository.Delete(Order);
             await _OrderRepository.SaveChangesAsync();
 
