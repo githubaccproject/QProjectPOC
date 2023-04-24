@@ -9,6 +9,6 @@ namespace Infrastructure.Repositories.OrderRepository
 {
     public interface IOrderRepository : IRepository<Order>
     {
-        // Add any additional methods specific to Order entity
+      
     }
 }
