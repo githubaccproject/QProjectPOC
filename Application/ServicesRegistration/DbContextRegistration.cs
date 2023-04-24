@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Application.RepositoryRegistration
+namespace Application.ServicesRegistration
 {
 
     public static class DbContextRegistration

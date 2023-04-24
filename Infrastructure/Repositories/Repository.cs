@@ -31,7 +31,8 @@ namespace Infrastructure.Repositories
 
         public void Update(T entity)
         {
-            _dbSet.Attach(entity);
+           
+            _dbSet.Update(entity);
             _dbContext.Entry(entity).State = EntityState.Modified;
         }
 
@@ -39,6 +40,13 @@ namespace Infrastructure.Repositories
         {
             _dbSet.Remove(entity);
         }
+
+        public void Detached(T entity)
+        {
+            _dbContext.Entry(entity).State = EntityState.Detached;
+        }
+
+
 
         public async Task SaveChangesAsync()
         {

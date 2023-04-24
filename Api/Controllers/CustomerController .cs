@@ -53,9 +53,7 @@ namespace Api.Controllers
                 {
                     return NotFound();
                 }
-                var customerDto = _mapper.Map<CustomerDto>(customer);
-
-                return Ok(customerDto);
+                return Ok(customer);
             }
             catch (Exception ex)
             {
@@ -71,7 +69,7 @@ namespace Api.Controllers
         {
             try
             {
-                var validator = new CustomerDtoValidator();
+                var validator = new CreateCustomerDtoValidator();
                 var result = await validator.ValidateAsync(createCustomerDto);
                 if (!result.IsValid)
                 {

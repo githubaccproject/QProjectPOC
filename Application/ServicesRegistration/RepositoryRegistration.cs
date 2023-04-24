@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.RepositoryRegistration
+namespace Application.ServicesRegistration
 {
     public static class RepositoryRegistration
     {

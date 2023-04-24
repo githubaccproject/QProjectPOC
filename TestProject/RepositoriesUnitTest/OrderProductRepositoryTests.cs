@@ -26,12 +26,12 @@ namespace TestProject.RepositoryUnitTests
                 .Options;
 
             // Create a new instance of OrderProductRepository with the in-memory database
-            using (var dbContext = new ApplicationDBContext(_dbContextOptions,null))
+            using (var dbContext = new ApplicationDBContext(_dbContextOptions))
             {
                 dbContext.Database.EnsureCreated();
             }
 
-            _orderProductRepository = new OrderProductRepository(new ApplicationDBContext(_dbContextOptions,null));
+            _orderProductRepository = new OrderProductRepository(new ApplicationDBContext(_dbContextOptions));
         }
 
         [TestMethod]
@@ -39,7 +39,7 @@ namespace TestProject.RepositoryUnitTests
         {
             // Arrange
             var orderProduct = new OrderProduct { Id = 1, Order_ID = 1, Product_ID = 1, price = 10.99m, MembershipName = "Test Membership", Quantity = 2 };
-            using (var dbContext = new ApplicationDBContext(_dbContextOptions,null))
+            using (var dbContext = new ApplicationDBContext(_dbContextOptions))
             {
                 dbContext.OrderProduct.Add(orderProduct);
                 dbContext.SaveChanges();
@@ -59,7 +59,7 @@ namespace TestProject.RepositoryUnitTests
             // Arrange
             var orderProduct1 = new OrderProduct { Id = 1, Order_ID = 1, Product_ID = 1, price = 10.99m, MembershipName = "Test Membership 1", Quantity = 2 };
             var orderProduct2 = new OrderProduct { Id = 2, Order_ID = 2, Product_ID = 2, price = 20.99m, MembershipName = "Test Membership 2", Quantity = 3 };
-            using (var dbContext = new ApplicationDBContext(_dbContextOptions,null))
+            using (var dbContext = new ApplicationDBContext(_dbContextOptions))
             {
                 dbContext.OrderProduct.AddRange(orderProduct1, orderProduct2);
                 dbContext.SaveChanges();
@@ -84,7 +84,7 @@ namespace TestProject.RepositoryUnitTests
             _orderProductRepository.SaveChangesAsync();
 
             // Assert
-            using (var dbContext = new ApplicationDBContext(_dbContextOptions,null))
+            using (var dbContext = new ApplicationDBContext(_dbContextOptions))
             {
                 var result = await dbContext.OrderProduct.FirstOrDefaultAsync(op => op.Id == orderProduct.Id);
                 Assert.IsNotNull(result);
@@ -97,7 +97,7 @@ namespace TestProject.RepositoryUnitTests
         {
             // Arrange
             var orderProduct = new OrderProduct { Id = 1, Order_ID = 1, Product_ID = 1, price = 10.99m, MembershipName = "Test Membership", Quantity = 2 };
-            using (var dbContext = new ApplicationDBContext(_dbContextOptions,null))
+            using (var dbContext = new ApplicationDBContext(_dbContextOptions))
             {
                 dbContext.OrderProduct.Add(orderProduct);
                 dbContext.SaveChanges();
@@ -110,7 +110,7 @@ namespace TestProject.RepositoryUnitTests
             _orderProductRepository.SaveChangesAsync();
 
             // Assert
-            using (var dbContext = new ApplicationDBContext(_dbContextOptions,null))
+            using (var dbContext = new ApplicationDBContext(_dbContextOptions))
             {
                 var result = await dbContext.OrderProduct.FirstOrDefaultAsync(op => op.Id == orderProduct.Id);
                 Assert.IsNotNull(result);
@@ -123,7 +123,7 @@ namespace TestProject.RepositoryUnitTests
         {
             // Arrange
             var orderProduct = new OrderProduct { Id = 1, Order_ID = 1, Product_ID = 1, price = 10.99m, MembershipName = "Test Membership", Quantity = 2 };
-            using (var dbContext = new ApplicationDBContext(_dbContextOptions,null))
+            using (var dbContext = new ApplicationDBContext(_dbContextOptions))
             {
                 dbContext.OrderProduct.Add(orderProduct);
                 dbContext.SaveChanges();
@@ -134,7 +134,7 @@ namespace TestProject.RepositoryUnitTests
             _orderProductRepository.SaveChangesAsync();
 
             // Assert
-            using (var dbContext = new ApplicationDBContext(_dbContextOptions,null))
+            using (var dbContext = new ApplicationDBContext(_dbContextOptions))
             {
                 var result = await dbContext.OrderProduct.FirstOrDefaultAsync(op => op.Id == orderProduct.Id);
                 Assert.IsNull(result);
@@ -145,7 +145,7 @@ namespace TestProject.RepositoryUnitTests
         public void TestCleanup()
         {
             // Clean up the in-memory database after each test
-            using (var dbContext = new ApplicationDBContext(_dbContextOptions,null))
+            using (var dbContext = new ApplicationDBContext(_dbContextOptions))
             {
                 dbContext.Database.EnsureDeleted();
             }

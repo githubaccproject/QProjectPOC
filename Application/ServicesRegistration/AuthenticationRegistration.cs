@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
-namespace Application.RepositoryRegistration
+namespace Application.ServicesRegistration
 {
     public static class AuthenticationRegistration
     {
