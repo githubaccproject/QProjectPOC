@@ -23,7 +23,7 @@ namespace Infrastructure.Repositories.UserRepository
 
         public async Task<RegisterModel> AddUserAsync(RegisterModel user)
         {
-            // Generate password salt and hash
+           
             byte[] passwordSalt, passwordHash;
             GeneratePasswordHash(user.Password, out passwordSalt, out passwordHash);
 
@@ -36,7 +36,7 @@ namespace Infrastructure.Repositories.UserRepository
                 FirstName = user.FirstName,
             };
           
-            // Add the user to the database
+          
             _dbContext.User.Add(newModel);
             await _dbContext.SaveChangesAsync();
 
@@ -46,24 +46,24 @@ namespace Infrastructure.Repositories.UserRepository
         public async Task<int?> GetUserByUsernameAsync(string username, string password)
         {
             var user = await _dbContext.User.FirstOrDefaultAsync(u => u.Username == username);
-            // If no user found, return null
+           
             if (user == null)
             {
                 return null;
             }
 
-            // Validate the password
+   
             if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
             {
                 return null;
             }
 
-            // Return the user ID if username and password are valid
+         
             return user.Id;
         }
 
 
-        // Method to verify the password hash
+     
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using (var hmac = new HMACSHA512(passwordSalt))
@@ -81,7 +81,7 @@ namespace Infrastructure.Repositories.UserRepository
         }
 
 
-        // Method to generate password salt and hash
+
         private void GeneratePasswordHash(string password, out byte[] passwordSalt, out byte[] passwordHash)
         {
             using (var hmac = new HMACSHA512())
