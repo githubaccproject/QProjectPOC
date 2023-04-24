@@ -35,15 +35,13 @@ namespace Application.Handlers.OrderHandler
                 _orderRepository.Detached(existingOrder);
             }
 
-            // Update the properties of the existing order based on the UpdateOrderDto properties
+         
             existingOrder.Customer_ID = request.Order.CustomerId; 
             existingOrder.Date = request.Order.Date;
             existingOrder.price = request.Order.Price;
 
-            // Update the OrderProducts
-            if (request.Order.OrderProducts != null)
+               if (request.Order.OrderProducts != null)
             {
-                // Remove any existing OrderProducts not present in the update request
                 var orderProductsToRemove = existingOrder.OrderProducts
                     .Where(op => !request.Order.OrderProducts.Any(opd => opd.Id == op.Id))
                     .ToList();
@@ -53,14 +51,14 @@ namespace Application.Handlers.OrderHandler
                     existingOrder.OrderProducts.Remove(orderProductToRemove);
                 }
 
-                // Update or add new OrderProducts
+                
                 foreach (var orderProductDto in request.Order.OrderProducts)
                 {
                     var existingOrderProduct = existingOrder.OrderProducts.FirstOrDefault(op => op.Id == orderProductDto.Id);
 
                     if (existingOrderProduct != null)
                     {
-                        // Update existing OrderProduct
+                      
                         existingOrderProduct.Product_ID = orderProductDto.ProductId; // Updated property name from Product_ID to ProductId
                         existingOrderProduct.price = orderProductDto.Price;
                         existingOrderProduct.MembershipName = orderProductDto.MembershipName;
@@ -68,7 +66,7 @@ namespace Application.Handlers.OrderHandler
                     }
                     else
                     {
-                        // Add new OrderProduct
+                        
                         var newOrderProduct = new OrderProduct
                         {
                             Order_ID = existingOrder.Id,
