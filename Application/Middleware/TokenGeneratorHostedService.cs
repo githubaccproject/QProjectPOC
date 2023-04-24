@@ -17,17 +17,17 @@ public class TokenGeneratorHostedService : IHostedService
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        // Generate a token during application startup
+       
         var token = _tokenManager.GenerateToken();
 
-        // Other initialization tasks
+      
 
         return Task.CompletedTask;
     }
 
     public Task StopAsync(CancellationToken cancellationToken)
     {
-        // Clean up tasks
+   
 
         return Task.CompletedTask;
     }
