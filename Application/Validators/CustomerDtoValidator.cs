@@ -1,9 +1,9 @@
 ﻿using Application.DTOs;
 using FluentValidation;
 
-public class CustomerDtoValidator : AbstractValidator<CreateCustomerDto>
+public class CreateCustomerDtoValidator : AbstractValidator<CreateCustomerDto>
 {
-    public CustomerDtoValidator()
+    public CreateCustomerDtoValidator()
     {
         RuleFor(x => x.Name)
             .NotEmpty().WithMessage("Name is required.")
@@ -23,8 +23,6 @@ public class UpdateCustomerDtoValidator : AbstractValidator<UpdateCustomerDto>
 {
     public UpdateCustomerDtoValidator()
     {
-        RuleFor(x => x.Id)
-            .GreaterThan(0).WithMessage("Customer Id must be greater than 0.");
 
         RuleFor(x => x.Name)
             .NotEmpty().WithMessage("Name is required.")

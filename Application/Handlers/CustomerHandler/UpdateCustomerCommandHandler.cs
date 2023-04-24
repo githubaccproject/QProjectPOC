@@ -24,23 +24,16 @@ namespace Application.Handlers.CustomerHandler
 
         public async Task<int> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
         {
-            // Perform validation using FluentValidation
 
-            // If validation fails, throw an exception or return appropriate response
-
-            // Retrieve the customer from the repository
             var customer = await _customerRepository.GetByIdAsync(request.Id);
-
             if (customer == null)
             {
-                // Customer not found, handle appropriately
                 throw new Exception("Customer not found.");
             }
-
-            // Update the customer entity with the data from UpdateCustomerDto
+            else {
+                 _customerRepository.Detached(customer);
+            }
             var UpdateCustomer = _mapper.Map<Customer>(request.Customer);
-
-            // Update the repository
             _customerRepository.Update(UpdateCustomer);
             await _customerRepository.SaveChangesAsync();
 

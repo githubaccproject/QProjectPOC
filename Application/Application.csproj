@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Commands\CustomerCommand\**" />
+    <EmbeddedResource Remove="Commands\CustomerCommand\**" />
+    <None Remove="Commands\CustomerCommand\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Collection" Version="9.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
@@ -23,14 +29,6 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.29.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Commands\CustomerCommand\" />
-    <Folder Include="Commands\OrderCommand\" />
-    <Folder Include="Commands\OrderProductCommand\" />
-    <Folder Include="Commands\ProductCommand\" />
-    <Folder Include="Handlers\OrderHandler\" />
   </ItemGroup>
 
   <ItemGroup>

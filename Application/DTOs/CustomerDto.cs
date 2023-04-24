@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace Application.DTOs
@@ -41,7 +42,7 @@ namespace Application.DTOs
 
     public class UpdateCustomerDto
     {
-        [Required]
+        [JsonIgnore]
         public int Id { get; set; }
 
         [Required]

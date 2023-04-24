@@ -13,8 +13,10 @@ namespace Application.Validators
     {
         public static void RegisterValidators(IServiceCollection services)
         {
-            services.AddTransient<IValidator<CreateCustomerDto>, CustomerDtoValidator>();
+            services.AddTransient<IValidator<CreateCustomerDto>, CreateCustomerDtoValidator>();
             services.AddTransient<IValidator<UpdateCustomerDto>, UpdateCustomerDtoValidator>();
+            services.AddTransient<IValidator<CreateOrderDto>, CreateOrderDtoValidator>();
+            services.AddTransient<IValidator<UpdateOrderDto>, UpdateOrderDtoValidator>();
         }
     }
 }

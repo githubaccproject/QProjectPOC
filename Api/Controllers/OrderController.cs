@@ -5,11 +5,13 @@ using Application.Queries.OrderQuery;
 using Application.Validators;
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/orders")]
     public class OrderController : ControllerBase
@@ -30,7 +32,7 @@ namespace Api.Controllers
         {
             try
             {
-                var query = new GetCustomersQuery();
+                var query = new GetOrdersQuery();
                 var customers = await _mediator.Send(query);
                 return Ok(customers);
             }
@@ -155,8 +157,7 @@ namespace Api.Controllers
                 // Use Mediator to send a DeleteOrderCommand
                 await _mediator.Send(command);
 
-                // Return a NoContent response
-                return NoContent();
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -167,6 +168,7 @@ namespace Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
     }
 }
 

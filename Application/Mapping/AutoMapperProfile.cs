@@ -16,7 +16,11 @@ namespace Application.Mapping
             CreateMap<CreateCustomerDto, Customer>().ReverseMap();
             CreateMap<CustomerDto, Customer>().ReverseMap();
             CreateMap<UpdateCustomerDto, Customer>().ReverseMap();
-            // Add other mappings as needed
+
+            CreateMap<CreateOrderDto, Order>().ReverseMap();
+            CreateMap<OrderDto, Order>().ReverseMap();
+            CreateMap<UpdateOrderDto, Order>().ReverseMap();
+
         }
     }
 

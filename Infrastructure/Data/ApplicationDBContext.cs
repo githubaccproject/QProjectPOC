@@ -7,18 +7,12 @@ namespace Infrastructure.Data
 
     public class ApplicationDBContext : DbContext
     {
-        private readonly IConfiguration _configuration;
-        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options, IConfiguration configuration) : base(options)
+
+        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
         {
-            _configuration = configuration;
+         
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
-            }
-        }
+        
 
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Order> Order { get; set; }

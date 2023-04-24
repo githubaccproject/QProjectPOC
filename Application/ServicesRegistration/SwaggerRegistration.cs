@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
-namespace Application.RepositoryRegistration
+namespace Application.ServicesRegistration
 {
 
         public static class SwaggerRegistration

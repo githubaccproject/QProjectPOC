@@ -25,7 +25,7 @@ namespace TestProject.RepositoryUnitTests
             var options = new DbContextOptionsBuilder<ApplicationDBContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
-            _dbContextOptions = new ApplicationDBContext(options,null);
+            _dbContextOptions = new ApplicationDBContext(options);
             _orderRepository = new OrderRepository(_dbContextOptions);
         }
 

@@ -1,12 +1,16 @@
 using Application.Mapping;
 using Application.Handlers;
-using Application.RepositoryRegistration;
+using Application.ServicesRegistration;
 using Application.Validators;
+using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
-AuthenticationRegistration.RegisterAuthentication(builder.Services, builder.Configuration);
+builder.Services.AddDbContext<ApplicationDBContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 RepositoryRegistration.RegisterRepositories(builder.Services);
+AuthenticationRegistration.RegisterAuthentication(builder.Services, builder.Configuration);
 MediatRRegistration.RegisterMediatRHandlers(builder.Services);
 ValidatorRegistration.RegisterValidators(builder.Services);
 SwaggerRegistration.RegisterSwagger(builder.Services);
