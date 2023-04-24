@@ -18,7 +18,6 @@ namespace Application.ServicesRegistration
                         BearerFormat = "JWT"
                     });
 
-                    // Require the JWT token in the Swagger UI requests
                     c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     {
