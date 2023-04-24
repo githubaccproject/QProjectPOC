@@ -9,6 +9,6 @@ namespace Infrastructure.Repositories.OrderProductRepository
 {
     public interface IOrderProductRepository : IRepository<OrderProduct>
     {
-        // Add any additional methods specific to OrderProduct entity
+  
     }
 }
