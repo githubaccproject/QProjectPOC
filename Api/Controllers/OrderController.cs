@@ -1,9 +1,7 @@
-﻿using Application.Commands;
-using Application.DTOs;
-using Application.Queries.CustomerQuery;
-using Application.Queries.OrderQuery;
-using Application.Validators;
-using AutoMapper;
+﻿using Application.Orders.Commands;
+using Application.Orders.Dtos;
+using Application.Orders.Queries;
+using Application.Orders.Validators;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,13 +15,11 @@ namespace Api.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IMapper _mapper;
         private readonly ILogger<OrderController> _logger;
 
-        public OrderController(IMediator mediator, IMapper mapper, ILogger<OrderController> logger)
+        public OrderController(IMediator mediator, ILogger<OrderController> logger)
         {
             _mediator = mediator;
-            _mapper = mapper;
             _logger = logger;
         }
 
@@ -56,9 +52,7 @@ namespace Api.Controllers
                 {
                     return NotFound();
                 }
-                var orderDto = _mapper.Map<OrderDto>(order);
-
-                return Ok(orderDto);
+                return Ok(order);
             }
             catch (Exception ex)
             {

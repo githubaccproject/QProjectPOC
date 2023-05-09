@@ -2,11 +2,6 @@
 using Infrastructure.Repositories.OrderRepository;
 using Infrastructure.Repositories.UserRepository;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.ServicesRegistration
 {

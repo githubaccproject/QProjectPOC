@@ -1,8 +1,8 @@
 ﻿using Api.Controllers;
-using Application.Commands;
-using Application.DTOs;
-using Application.Queries.OrderQuery;
-using AutoMapper;
+using Application.Customers.Commands;
+using Application.Orders.Commands;
+using Application.Orders.Dtos;
+using Application.Orders.Queries;
 using Domain.Entities;
 using FluentValidation;
 using FluentValidation.Results;
@@ -24,7 +24,6 @@ namespace TestProject.ControllerUnitTest
     {
         private OrderController _orderController;
         private Mock<IMediator> _mediatorMock;
-        private Mock<IMapper> _mapperMock;
         private Mock<ILogger<OrderController>> _loggerMock;
 
         [TestInitialize]
@@ -32,11 +31,10 @@ namespace TestProject.ControllerUnitTest
         {
             // Initialize mocks
             _mediatorMock = new Mock<IMediator>();
-            _mapperMock = new Mock<IMapper>();
             _loggerMock = new Mock<ILogger<OrderController>>();
 
             // Create instance of OrderController
-            _orderController = new OrderController(_mediatorMock.Object, _mapperMock.Object, _loggerMock.Object);
+            _orderController = new OrderController(_mediatorMock.Object, _loggerMock.Object);
         }
 
         [TestMethod]
@@ -89,7 +87,6 @@ namespace TestProject.ControllerUnitTest
             var orderDto = new OrderDto();
             var query = new GetOrderByIdQuery(orderId);
             _mediatorMock.Setup(m => m.Send(It.IsAny<GetOrderByIdQuery>(), default)).ReturnsAsync(orderDto);
-            _mapperMock.Setup(m => m.Map<OrderDto>(order)).Returns(orderDto);
             // Act
             var result = await _orderController.GetOrderById(orderId);
 

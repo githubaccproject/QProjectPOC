@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
-using AutoMapper;
-using Application.Queries.CustomerQuery;
 using NLog;
 using Microsoft.AspNetCore.Authorization;
-using Application.DTOs;
-using Application.Commands;
+using Application.Customers.Queries;
+using Application.Customers.Dtos;
+using Application.Customers.Validators;
+using Application.Customers.Commands;
 
 namespace Api.Controllers
 {
@@ -16,13 +16,12 @@ namespace Api.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IMapper _mapper;
+
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
-        public CustomerController(IMediator mediator, IMapper mapper)
+        public CustomerController(IMediator mediator)
         {
             _mediator = mediator;
-            _mapper = mapper;
         }
         [HttpGet]
         public async Task<IActionResult> GetCustomers()

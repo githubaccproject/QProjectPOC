@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using Api.Controllers;
-using Application.Commands;
-using Application.DTOs;
-using Application.Queries.CustomerQuery;
-using AutoMapper;
-using Castle.Core.Resource;
+using Application.Customers.Commands;
+using Application.Customers.Dtos;
+using Application.Customers.Queries;
 using Domain.Entities;
 using FluentValidation;
 using MediatR;
@@ -16,7 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using NLog;
 using ILogger = NLog.ILogger;
 
 namespace TestProject.ControllerUnitTest
@@ -26,7 +22,6 @@ namespace TestProject.ControllerUnitTest
     public class CustomerControllerTests
     {
         private Mock<IMediator> _mediatorMock;
-        private Mock<IMapper> _mapperMock;
         private Mock<ILogger> _loggerMock;
 
         private CustomerController _customerController;
@@ -35,9 +30,9 @@ namespace TestProject.ControllerUnitTest
         public void TestInitialize()
         {
             _mediatorMock = new Mock<IMediator>();
-            _mapperMock = new Mock<IMapper>();
+           
             _loggerMock = new Mock<ILogger>();
-            _customerController = new CustomerController(_mediatorMock.Object, _mapperMock.Object);
+            _customerController = new CustomerController(_mediatorMock.Object);
         }
 
         [TestMethod]
@@ -84,7 +79,7 @@ namespace TestProject.ControllerUnitTest
             var customerDto = new CustomerDto();
             var query = new GetCustomerByIdQuery(customerId);
             _mediatorMock.Setup(m => m.Send(It.IsAny<GetCustomerByIdQuery>(), default)).ReturnsAsync(customerDto);
-            _mapperMock.Setup(m => m.Map<CustomerDto>(customer)).Returns(customerDto);
+           
             // Act
             var result = await _customerController.GetCustomerById(customerId);
 

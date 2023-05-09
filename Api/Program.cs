@@ -1,7 +1,5 @@
 using Application.Mapping;
-using Application.Handlers;
 using Application.ServicesRegistration;
-using Application.Validators;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,10 +1,5 @@
 ﻿using Domain.Entities;
 using Infrastructure.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories.OrderRepository
 {
@@ -13,8 +8,6 @@ namespace Infrastructure.Repositories.OrderRepository
         public OrderRepository(ApplicationDBContext dbContext) : base(dbContext)
         {
         }
-
-        // Add any additional methods specific to Order entity
     }
 
 }

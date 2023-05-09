@@ -1,13 +1,10 @@
 ﻿using Domain.Entities;
 using Infrastructure.Repositories.UserRepository;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -16,7 +13,7 @@ public class AuthController : ControllerBase
     private readonly IConfiguration _configuration;
     private readonly IUserRepository _userRepository;
 
-    public AuthController(IConfiguration configuration,IUserRepository userRepository)
+    public AuthController(IConfiguration configuration, IUserRepository userRepository)
     {
         _configuration = configuration;
         _userRepository = userRepository;
@@ -26,12 +23,12 @@ public class AuthController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterModel model)
     {
-       
+
         if (!ModelState.IsValid)
         {
             return BadRequest("Invalid registration request");
         }
-        var userId = await _userRepository.AddUserAsync(model);
+        await _userRepository.AddUserAsync(model);
         return Ok("User registered successfully");
     }
 
@@ -39,7 +36,7 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginModel model)
     {
-      
+
         if (!ModelState.IsValid)
         {
             return BadRequest("Invalid login request");
@@ -50,7 +47,7 @@ public class AuthController : ControllerBase
         {
             return Unauthorized("Invalid username or password");
         }
-     
+
         var token = GenerateJwtToken((int)userId);
         return Ok(new { token });
     }
@@ -63,7 +60,7 @@ public class AuthController : ControllerBase
         var claims = new[]
         {
             new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
-           
+
         };
 
         var token = new JwtSecurityToken(
